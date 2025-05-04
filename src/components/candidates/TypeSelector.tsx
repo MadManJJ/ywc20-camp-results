@@ -11,7 +11,7 @@ import {
 export default function SelectDemo() {
   return (
     <Select>
-      <SelectTrigger className="w-[25%] mb-4 text-[#494949] border-[#494949]">
+      <SelectTrigger className="w-[100%] md:w-[50%] lg:w-[25%] mb-4 text-white border-[#494949]">
         <SelectValue placeholder="Select a Candidate Type" />
       </SelectTrigger>
       <SelectContent>

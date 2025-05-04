@@ -4,6 +4,7 @@ import { useState, useEffect, use } from "react";
 import { MoreHorizontal } from "lucide-react";
 import getCandidate from "@/lib/Candidates/getCandidates";
 import { CandidateType, Candidate } from "../../../interface";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   Table,
   TableBody,
@@ -30,6 +31,7 @@ const SelectedCandidatesList = () => {
   const [designCandidates, setDesignCandidates] = useState();
   const [marketingCandidates, setMarketingCandidates] = useState();
   const [progCandidates, setProgCandidates] = useState();
+  const [loading, setLoading] = useState(true);
   // const [candidateType, setCandidateType] = useState<CandidateType>(
   //   CandidateType.content
   // );
@@ -46,6 +48,7 @@ const SelectedCandidatesList = () => {
         setProgCandidates(data.candidate);
 
         setCurrentCandidates(data.content);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching candidates:", error);
       }
@@ -54,11 +57,19 @@ const SelectedCandidatesList = () => {
     fetchCandidates();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center mt-40">
+        <CircularProgress style={{ color: "var(--background2)" }} />
+      </div>
+    );
+  }
+
   return (
     <div className="border border-[#494949] rounded-md mb-10">
       <Table className="text-white">
         <TableHeader>
-          <TableRow className="border-[#494949] hover:bg-white/10 bg-[#0f0f0f] w-full">
+          <TableRow className="border-[#494949] hover:bg-white/10 w-full">
             <TableHead className=" text-gray-500 text-sm border-[#494949] pl-4">
               First Name
             </TableHead>
@@ -76,7 +87,7 @@ const SelectedCandidatesList = () => {
             currentCandidates.map((candidate: Candidate) => (
               <TableRow
                 key={candidate.interviewRefNo}
-                className="border-[#494949] hover:bg-white/10 bg-[#0f0f0f]"
+                className="border-[#494949] hover:bg-white/10"
               >
                 <TableCell className="font-medium text-white p-4 ">
                   {candidate.firstName}
