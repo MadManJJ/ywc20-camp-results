@@ -128,17 +128,19 @@ const SelectedCandidatesList = () => {
       <Table className="text-white">
         <TableHeader>
           <TableRow className="border-[#494949] hover:bg-white/10 w-full">
-            <TableHead className="w-[20%] text-gray-500 text-sm border-[#494949] pl-4">
+            <TableHead className="w-[30%] text-gray-500 text-sm border-[#494949] pl-4 md:w-[20%]">
               Interview No
             </TableHead>
-            <TableHead className="w-[20%] text-gray-500 text-sm pl-4">
+            <TableHead className="w-[30%] text-gray-500 text-sm pl-4 md:w-[20%]">
               First Name
             </TableHead>
             <TableHead className="w-[30%] text-gray-500 text-sm pl-4">
               Last Name
             </TableHead>
-            <TableHead className="text-gray-500 text-sm pl-4">Major</TableHead>
-            <TableHead className="text-gray-500 text-sm pl-4"></TableHead>
+            <TableHead className="text-gray-500 text-sm pl-4 hidden md:table-cell">
+              Major
+            </TableHead>
+            <TableHead className="text-gray-500 text-sm pl-4 float-right mr-2"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -157,10 +159,10 @@ const SelectedCandidatesList = () => {
                 <TableCell className="text-white p-4">
                   {candidate.lastName}
                 </TableCell>
-                <TableCell className="text-white p-4">
+                <TableCell className="text-white p-4 hidden md:table-cell">
                   {candidate.major}
                 </TableCell>
-                <TableCell className="text-white py-4 px-0">
+                <TableCell className="text-white py-4 px-0 float-right mr-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="h-8 w-8 p-0">
