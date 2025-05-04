@@ -40,7 +40,6 @@ const SelectedCandidatesList = () => {
     const fetchCandidates = async () => {
       try {
         const data = await getCandidate();
-        console.log("Fetched candidates:", data.content);
         setContentCandidates(data.content);
         setDesignCandidates(data.design);
         setMarketingCandidates(data.marketing);
@@ -56,7 +55,7 @@ const SelectedCandidatesList = () => {
   }, []);
 
   return (
-    <div className="border border-[#494949] rounded-md max-w-[100%] sm:max-w-[80%] w-full mb-10">
+    <div className="border border-[#494949] rounded-md mb-10">
       <Table className="text-white">
         <TableHeader>
           <TableRow className="border-[#494949] hover:bg-white/10 bg-[#0f0f0f] w-full">
