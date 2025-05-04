@@ -162,16 +162,30 @@ const SelectedCandidatesList = () => {
                 <TableCell className="text-white py-4 px-0 float-right mr-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="h-8 w-8 p-0">
+                      <Button
+                        variant="ghost"
+                        className="h-8 w-8 p-0 text-white  "
+                      >
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem>Copy Email</DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>View Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Remove</DropdownMenuItem>
+                    <DropdownMenuContent
+                      align="end"
+                      className="bg-[#0a0a0a] text-white border border-[#494949] rounded-md shadow-lg"
+                    >
+                      <DropdownMenuLabel className="text-white border-b border-[#494949] pb-2 mb-2">
+                        Actions
+                      </DropdownMenuLabel>
+                      <DropdownMenuItem className="text-white hover:bg-gray-800">
+                        Copy Email
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator className="border-t border-[#494949]" />
+                      <DropdownMenuItem className="text-white hover:bg-gray-800">
+                        View Profile
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="text-white hover:bg-gray-800">
+                        Remove
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>

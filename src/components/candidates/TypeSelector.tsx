@@ -24,16 +24,32 @@ export default function TypeSelector() {
 
   return (
     <Select onValueChange={handleTypeSelect} value={type}>
-      <SelectTrigger className="w-[100%] md:w-[50%] lg:w-[25%] mb-4 text-white border-[#494949]">
+      <SelectTrigger className="w-[100%] md:w-[50%] lg:w-[25%] mb-4 text-white border-[#494949] bg-[#0a0a0a] hover:bg-[#101010]">
         <SelectValue placeholder="Select a Candidate Type" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="bg-[#0a0a0a] text-white">
         <SelectGroup>
-          <SelectLabel>Candidate Type</SelectLabel>
-          <SelectItem value="content">Content</SelectItem>
-          <SelectItem value="design">Design</SelectItem>
-          <SelectItem value="marketing">Marketing</SelectItem>
-          <SelectItem value="programming">Programming</SelectItem>
+          <SelectLabel className="text-white border-b border-[#494949] pb-2 mb-2">
+            Candidate Type
+          </SelectLabel>
+          <SelectItem value="content" className="text-white hover:bg-gray-800">
+            Content
+          </SelectItem>
+          <SelectItem value="design" className="text-white hover:bg-gray-800">
+            Design
+          </SelectItem>
+          <SelectItem
+            value="marketing"
+            className="text-white hover:bg-gray-800"
+          >
+            Marketing
+          </SelectItem>
+          <SelectItem
+            value="programming"
+            className="text-white hover:bg-gray-800"
+          >
+            Programming
+          </SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
