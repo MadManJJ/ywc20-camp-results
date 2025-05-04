@@ -1,10 +1,11 @@
 "use client";
 import { Candidates } from "@/data/candidates";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, use, useRef } from "react";
 import { MoreHorizontal } from "lucide-react";
 import getCandidate from "@/lib/Candidates/getCandidates";
 import { CandidateType, Candidate } from "../../../interface";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useSearchParams } from "next/navigation";
 import {
   Table,
   TableBody,
@@ -27,14 +28,14 @@ import {
 import { Button } from "@/components/ui/button";
 
 const SelectedCandidatesList = () => {
+  const searchParams = useSearchParams();
+  const previousTypeRef = useRef<string | null>(null);
+
   const [contentCandidates, setContentCandidates] = useState<Candidate[]>();
   const [designCandidates, setDesignCandidates] = useState();
   const [marketingCandidates, setMarketingCandidates] = useState();
   const [progCandidates, setProgCandidates] = useState();
   const [loading, setLoading] = useState(true);
-  // const [candidateType, setCandidateType] = useState<CandidateType>(
-  //   CandidateType.content
-  // );
 
   const [currentCandidates, setCurrentCandidates] = useState<Candidate[]>();
 
@@ -45,7 +46,7 @@ const SelectedCandidatesList = () => {
         setContentCandidates(data.content);
         setDesignCandidates(data.design);
         setMarketingCandidates(data.marketing);
-        setProgCandidates(data.candidate);
+        setProgCandidates(data.programming);
 
         setCurrentCandidates(data.content);
         setLoading(false);
@@ -56,6 +57,25 @@ const SelectedCandidatesList = () => {
 
     fetchCandidates();
   }, []);
+
+  useEffect(() => {
+    const currentType = searchParams.get("type");
+
+    if (currentType != previousTypeRef.current) {
+      // .current is from useRef
+      previousTypeRef.current = currentType;
+      if (currentType === "content") {
+        setCurrentCandidates(contentCandidates);
+      } else if (currentType === "design") {
+        setCurrentCandidates(designCandidates);
+      } else if (currentType === "marketing") {
+        setCurrentCandidates(marketingCandidates);
+      } else if (currentType === "programming") {
+        console.log("programming", progCandidates);
+        setCurrentCandidates(progCandidates);
+      }
+    }
+  }, [searchParams]);
 
   if (loading) {
     return (
