@@ -1,17 +1,14 @@
 "use client";
-import { Candidates } from "@/data/candidates";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { MoreHorizontal } from "lucide-react";
 import getCandidate from "@/lib/Candidates/getCandidates";
-import { CandidateType, Candidate } from "../../../interface";
+import { Candidate } from "../../../interface";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
