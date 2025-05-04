@@ -70,15 +70,16 @@ const SelectedCandidatesList = () => {
       <Table className="text-white">
         <TableHeader>
           <TableRow className="border-[#494949] hover:bg-white/10 w-full">
-            <TableHead className=" text-gray-500 text-sm border-[#494949] pl-4">
+            <TableHead className="w-[20%] text-gray-500 text-sm border-[#494949] pl-4">
+              Interview No
+            </TableHead>
+            <TableHead className="w-[20%] text-gray-500 text-sm pl-4">
               First Name
             </TableHead>
             <TableHead className="w-[30%] text-gray-500 text-sm pl-4">
               Last Name
             </TableHead>
-            <TableHead className="w-[30%] text-gray-500 text-sm pl-4">
-              Major
-            </TableHead>
+            <TableHead className="text-gray-500 text-sm pl-4">Major</TableHead>
             <TableHead className="text-gray-500 text-sm pl-4"></TableHead>
           </TableRow>
         </TableHeader>
@@ -89,6 +90,9 @@ const SelectedCandidatesList = () => {
                 key={candidate.interviewRefNo}
                 className="border-[#494949] hover:bg-white/10"
               >
+                <TableCell className="font-medium text-white p-4 ">
+                  {candidate.interviewRefNo}
+                </TableCell>
                 <TableCell className="font-medium text-white p-4 ">
                   {candidate.firstName}
                 </TableCell>
