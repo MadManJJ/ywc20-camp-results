@@ -1,11 +1,11 @@
 "use client";
 import { Candidates } from "@/data/candidates";
-import { useState, useEffect, use, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { MoreHorizontal } from "lucide-react";
 import getCandidate from "@/lib/Candidates/getCandidates";
 import { CandidateType, Candidate } from "../../../interface";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Table,
   TableBody,
@@ -28,8 +28,8 @@ import {
 import { Button } from "@/components/ui/button";
 
 const SelectedCandidatesList = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const previousTypeRef = useRef<string | null>(null);
 
   const [contentCandidates, setContentCandidates] = useState<Candidate[]>();
   const [designCandidates, setDesignCandidates] = useState();
@@ -54,27 +54,65 @@ const SelectedCandidatesList = () => {
         console.error("Error fetching candidates:", error);
       }
     };
+    const params = new URLSearchParams(window.location.search);
+    params.set("type", "content");
+    router.replace(`?${params.toString()}`, { scroll: false });
 
     fetchCandidates();
   }, []);
 
   useEffect(() => {
     const currentType = searchParams.get("type");
+    const currentFirstname = searchParams.get("firstname");
+    const currentLastname = searchParams.get("lastname");
+    const currentInterviewRefNo = searchParams.get("interviewRefNo");
 
-    if (currentType != previousTypeRef.current) {
-      // .current is from useRef
-      previousTypeRef.current = currentType;
+    const filteredCandidates = () => {
+      var curentTypeCandidates: Candidate[] = [];
       if (currentType === "content") {
-        setCurrentCandidates(contentCandidates);
+        curentTypeCandidates = contentCandidates || [];
       } else if (currentType === "design") {
-        setCurrentCandidates(designCandidates);
+        curentTypeCandidates = designCandidates || [];
       } else if (currentType === "marketing") {
-        setCurrentCandidates(marketingCandidates);
+        curentTypeCandidates = marketingCandidates || [];
       } else if (currentType === "programming") {
-        console.log("programming", progCandidates);
-        setCurrentCandidates(progCandidates);
+        curentTypeCandidates = progCandidates || [];
       }
-    }
+
+      curentTypeCandidates = curentTypeCandidates.filter((candidate) => {
+        // Check First Name
+        if (
+          currentFirstname &&
+          !candidate.firstName
+            .toLowerCase()
+            .includes(currentFirstname.toLowerCase())
+        ) {
+          return false;
+        }
+        // Check Last Name
+        if (
+          currentLastname &&
+          !candidate.lastName
+            .toLowerCase()
+            .includes(currentLastname.toLowerCase())
+        ) {
+          return false;
+        }
+        // Check Interview Ref No
+        if (
+          currentInterviewRefNo &&
+          !candidate.interviewRefNo
+            .toLowerCase()
+            .includes(currentInterviewRefNo.toLowerCase())
+        ) {
+          return false;
+        }
+        return true;
+      });
+      return curentTypeCandidates;
+    };
+    const actualfilteredCandidates = filteredCandidates();
+    setCurrentCandidates(actualfilteredCandidates);
   }, [searchParams]);
 
   if (loading) {

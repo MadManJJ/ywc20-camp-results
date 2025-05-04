@@ -1,5 +1,5 @@
 export interface Candidate {
-  interviewRefNo: number;
+  interviewRefNo: string;
   firstName: string;
   lastName: string;
   major: string;

@@ -18,7 +18,7 @@ export default function SearchInput({ name, q }: { name: string; q: string }) {
         params.delete(q);
       }
       router.replace(`?${params.toString()}`, { scroll: false });
-    }, 100); // debounce for smoother updates
+    }, 300); // debounce for smoother updates
 
     return () => clearTimeout(timeout);
   }, [query]);
