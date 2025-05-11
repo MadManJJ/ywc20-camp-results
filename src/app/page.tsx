@@ -5,7 +5,7 @@ import FilterBanner from "@/components/candidates/FilterBanner";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center">
-      <header className="text-2xl font-bold mb-14 p-8 pb-0 text-white">
+      <header className="text-2xl font-bold mb-14 p-8 pb-0 text-white text-center">
         Young Webmaster Camp 20
       </header>
       <div className="max-w-[95%] sm:max-w-[80%] w-full">
